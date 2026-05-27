@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELEOS — The Website Your Brand Deserves</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ["'Instrument Serif'", "serif"],
+              body: ["'Barlow'", "sans-serif"],
+            },
+            colors: {
+              background: "hsl(213 45% 67%)",
+              foreground: "hsl(0 0% 100%)",
+              card: "hsl(213 45% 62%)",
+              primary: "hsl(0 0% 100%)",
+              secondary: "hsl(213 45% 72%)",
+              muted: "hsl(213 35% 60%)",
+              accent: "hsl(213 45% 72%)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --background: 213 45% 67%;
+        --foreground: 0 0% 100%;
+        --card: 213 45% 62%;
+        --card-foreground: 0 0% 100%;
+        --primary: 0 0% 100%;
+        --primary-foreground: 213 45% 67%;
+        --secondary: 213 45% 72%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 213 35% 60%;
+        --muted-foreground: 0 0% 100% / 0.7;
+        --accent: 213 45% 72%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 84.2% 60.2%;
+        --border: 0 0% 100% / 0.2;
+        --input: 0 0% 100% / 0.2;
+        --ring: 0 0% 100% / 0.3;
+        --radius: 9999px;
+        --glass-bg: rgba(255, 255, 255, 0.12);
+        --glass-border: rgba(255, 255, 255, 0.25);
+        --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        --glass-blur: 16px;
+      }
+
+      html,
+      body {
+        background: #000;
+        color: #fff;
+        font-family: "Barlow", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .font-heading {
+        font-family: "Instrument Serif", serif;
+      }
+      .font-body {
+        font-family: "Barlow", sans-serif;
+      }
+
+      /* Liquid glass — subtle */
+      .liquid-glass {
+        background: rgba(255, 255, 255, 0.04);
+        background-blend-mode: luminosity;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: none;
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .liquid-glass::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.4px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.45) 0%,
+          rgba(255, 255, 255, 0.15) 20%,
+          rgba(255, 255, 255, 0) 40%,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 0.15) 80%,
+          rgba(255, 255, 255, 0.45) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* Liquid glass — strong */
+      .liquid-glass-strong {
+        background: rgba(255, 255, 255, 0.06);
+        background-blend-mode: luminosity;
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+        border: none;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05),
+          inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+      .liquid-glass-strong::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.4px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(255, 255, 255, 0.2) 20%,
+          rgba(255, 255, 255, 0) 40%,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 0.2) 80%,
+          rgba(255, 255, 255, 0.5) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* Video placeholder — subtle radial wash with diagonal stripe */
+      .video-placeholder {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 30% 40%,
+            rgba(80, 110, 160, 0.55) 0%,
+            rgba(20, 30, 50, 0.9) 55%,
+            #000 100%
+          );
+        overflow: hidden;
+      }
+      .video-placeholder::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.025) 0 2px,
+          transparent 2px 14px
+        );
+        mix-blend-mode: overlay;
+      }
+      .video-placeholder-label {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        z-index: 2;
+      }
+
+      /* GIF placeholders */
+      .gif-placeholder {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(120, 140, 180, 0.35),
+            rgba(40, 55, 85, 0.55)
+          );
+        overflow: hidden;
+      }
+      .gif-placeholder::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.04) 0 1px,
+          transparent 1px 10px
+        );
+      }
+      .gif-placeholder-label {
+        position: absolute;
+        bottom: 14px;
+        left: 14px;
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        z-index: 2;
+      }
+
+      /* Logo mark placeholder */
+      .logo-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          #d8e2f3 0%,
+          #6b86b5 60%,
+          #1a2440 100%
+        );
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+          0 4px 16px rgba(0, 0, 0, 0.4);
+        position: relative;
+      }
+      .logo-mark::after {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 30%,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0) 60%
+        );
+      }
+
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Hide scrollbar polish */
+      ::selection {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      /* ====================== Print overrides ====================== */
+      /* Always-on overrides so React/framer-motion don't fight the printout */
+      .print-force-show, .print-force-show * {
+        filter: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      @media print {
+        @page { size: A4 portrait; margin: 0.5cm; }
+        html, body {
+          background: #000 !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        /* Hide fixed nav and sticky video background entirely */
+        nav.fixed { display: none !important; }
+        iframe { display: none !important; }
+        /* Defeat sticky/fixed video container */
+        .sticky.top-0 { position: static !important; height: auto !important; overflow: visible !important; }
+        /* Remove negative margin that pulled content over the sticky video */
+        [style*="margin-top: -100vh"], [style*="marginTop: \"-100vh\""] { margin-top: 0 !important; }
+        /* Force all framer-motion + BlurText elements to final state */
+        body, body * {
+          filter: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+          transition: none !important;
+          text-shadow: none !important;
+        }
+        /* Keep glass cards readable — replace blur/translucent fills with solid dark */
+        .liquid-glass, .liquid-glass-strong {
+          background: rgba(255,255,255,0.06) !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          box-shadow: none !important;
+          border: 1px solid rgba(255,255,255,0.15) !important;
+        }
+        .liquid-glass::before, .liquid-glass-strong::before { display: none !important; }
+        /* Hero photo: drop the radial mask so the print version looks clean */
+        section[id="home"] [style*="WebkitMaskImage"] { -webkit-mask-image: none !important; mask-image: none !important; }
+        section[id="home"] { height: auto !important; padding-bottom: 40px !important; }
+        section[id="home"] [style*="top: 20%"] {
+          position: relative !important;
+          top: auto !important;
+          height: auto !important;
+          aspect-ratio: 16 / 9 !important;
+          margin-top: 32px !important;
+        }
+        /* Logical page breaks */
+        section { break-inside: avoid; page-break-inside: avoid; }
+        section[id="home"], section[id="projects"], section[id="servant-leadership"], section[id="contact"] {
+          break-before: page;
+          page-break-before: always;
+        }
+        /* Make sure the first section doesn't force a break */
+        section[id="home"] { break-before: auto !important; page-break-before: auto !important; }
+        /* Hide partner-bar empty whitespace shrinker */
+        [style*="pt-96"], [class*="pt-96"] { padding-top: 24px !important; }
+        /* Trim massive section paddings */
+        section { padding-top: 24px !important; padding-bottom: 24px !important; }
+        /* Color-keep the green contact section bg */
+        section[id="contact"] > div[style*="radial-gradient"] {
+          background: #2f5a3a !important;
+        }
+      }
+    </style>
+
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
+    <script>
+      // Normalize globals: framer-motion UMD exposes "Motion" or attaches to window.framerMotion variants
+      window.framerMotion = window.framerMotion || window.Motion || window.FramerMotion || window["framer-motion"];
+      // Suppress framer-motion's internal key warning (benign, fires on motion.span with mixed children)
+      const _origError = console.error;
+      console.error = function(...args) {
+        const msg = args[0];
+        if (typeof msg === 'string' && msg.indexOf('unique "key" prop') !== -1) return;
+        return _origError.apply(console, args);
+      };
+    </script>
+  </head>
+  <body class="bg-black text-white antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel" data-presets="react">
+/* global React, ReactDOM, framerMotion */
+const { useEffect, useRef, useState, useMemo } = React;
+const motion = framerMotion.motion;
+
+const Icon = ({ children, size = 16, stroke = 1.75, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" className={className}>
+    {children}
+  </svg>
+);
+const ArrowUpRight = (p) => (<Icon {...p}><path d="M7 17 17 7" /><path d="M7 7h10v10" /></Icon>);
+const Play = (p) => (<Icon {...p}><polygon points="6 3 20 12 6 21 6 3" fill="currentColor" /></Icon>);
+const Zap = (p) => (<Icon {...p}><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" /></Icon>);
+const Palette = (p) => (
+  <Icon {...p}>
+    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+  </Icon>
+);
+const BarChart3 = (p) => (<Icon {...p}><path d="M3 3v18h18" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></Icon>);
+const Shield = (p) => (<Icon {...p}><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8z" /></Icon>);
+const Menu = (p) => (<Icon {...p}><line x1="4" y1="6" x2="20" y2="6" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="18" x2="20" y2="18" /></Icon>);
+
+function VideoPlaceholder({ label = "video" }) {
+  return (
+    <div className="video-placeholder">
+      <div className="video-placeholder-label">▶ {label}</div>
+    </div>
+  );
+}
+
+function BlurText({ text, className = "", splitBy = "word", delay = 200, stagger = 0.06 }) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } });
+    }, { threshold: 0.2 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const parts = useMemo(() => splitBy === "letter" ? Array.from(text) : text.split(" "), [text, splitBy]);
+  return (
+    <span ref={ref} className={className} style={{ display: "inline-block" }}>
+      {parts.map((p, i) => (
+        <motion.span key={i}
+          initial={{ filter: "blur(10px)", opacity: 0, y: 50 }}
+          animate={inView ? { filter: "blur(0px)", opacity: 1, y: 0 } : { filter: "blur(10px)", opacity: 0, y: 50 }}
+          transition={{ duration: 0.7, delay: delay / 1000 + i * stagger, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: "inline-block", whiteSpace: "pre", willChange: "filter, opacity, transform" }}
+        >
+          {p}{splitBy === "word" && i < parts.length - 1 ? "\u00A0" : ""}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+const Badge = ({ children }) => (
+  <span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white font-body">{children}</span>
+);
+
+function Navbar() {
+  const links = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Servant Leadership", href: "#servant-leadership" },
+  ];
+  return (
+    <nav className="fixed top-4 left-0 right-0 z-50 px-6 lg:px-16 py-3">
+      <div className="flex items-center justify-between">
+        <a href="#" className="flex items-center gap-3">
+          <img src="logo.webp" alt="Eleos Solutions" className="h-12 w-12 object-contain" style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.4))" }} />
+          <span className="font-heading italic text-2xl text-white tracking-tight hidden sm:inline whitespace-nowrap">ELEOS Solutions</span>
+        </a>
+        <div className="hidden md:flex liquid-glass rounded-full px-1.5 py-1 items-center">
+          {links.map((l) => (
+            <a key={l.label} href={l.href} className="px-3 py-2 text-sm font-medium text-white/90 font-body hover:text-white transition whitespace-nowrap">{l.label}</a>
+          ))}
+          <a href="#contact" className="ml-1 inline-flex items-center gap-1.5 bg-white text-black rounded-full px-3.5 py-1.5 text-sm font-medium hover:bg-white/90 transition whitespace-nowrap">
+            Reach Out <ArrowUpRight size={14} stroke={2} />
+          </a>
+        </div>
+        <button className="md:hidden liquid-glass rounded-full p-2 text-white"><Menu size={18} /></button>
+      </div>
+    </nav>
+  );
+}
+
+function Hero() {
+  const partners = ["Aurelia", "Northbeam", "Helio", "Quanta", "Vellum"];
+  return (
+    <section id="home" className="relative overflow-visible" style={{ height: 1200 }}>
+      <div className="absolute left-0 w-full z-0" style={{ top: "20%", height: "70%" }}>
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            WebkitMaskImage:
+              "radial-gradient(ellipse 55% 55% at center, #000 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.4) 80%, transparent 100%)",
+            maskImage:
+              "radial-gradient(ellipse 55% 55% at center, #000 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.4) 80%, transparent 100%)",
+          }}
+        >
+          <img src="hero.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: "center 15%" }} />
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-black/5 z-0" />
+      <div className="absolute bottom-0 left-0 right-0 z-[1] pointer-events-none" style={{ height: 300, background: "linear-gradient(to bottom, transparent, #000)" }} />
+      <div className="relative z-10 h-full flex flex-col items-center px-6" style={{ paddingTop: 150 }}>
+        <motion.div key="hero-pill" initial={{ filter: "blur(10px)", opacity: 0, y: 20 }} animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="liquid-glass rounded-full pl-1 pr-4 py-1 flex items-center gap-2.5 mb-8">
+          <span className="bg-white text-black rounded-full px-3 py-1 text-xs font-semibold">New</span>
+          <span className="text-sm text-white/90 font-body whitespace-nowrap">Introducing New Off-Roading Mobility Devices</span>
+        </motion.div>
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading italic text-foreground text-center max-w-5xl" style={{ lineHeight: 0.95, letterSpacing: "-2px", textShadow: "0 2px 20px rgba(0,0,0,0.6), 0 4px 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,0,0,0.4)" }}>
+          <BlurText text="ELEOS Solutions" delay={100} stagger={0.06} />
+        </h1>
+        <motion.p
+          initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
+          animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="font-heading italic text-2xl md:text-3xl lg:text-4xl text-white text-center max-w-3xl mt-5"
+          style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 4px 32px rgba(0,0,0,0.5)" }}
+        >
+          Elevating Lives through Empathy &amp; Ongoing Support
+        </motion.p>
+        <motion.p initial={{ filter: "blur(10px)", opacity: 0, y: 20 }} animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} className="text-sm md:text-base text-white font-body font-light leading-tight text-center max-w-md mt-8">
+        </motion.p>
+        <motion.div initial={{ filter: "blur(10px)", opacity: 0, y: 20 }} animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.1 }} className="flex items-center gap-4 mt-7">
+          <a href="#the-name" className="liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm font-medium text-white whitespace-nowrap">
+            Learn More <ArrowUpRight size={16} stroke={2} />
+          </a>
+        </motion.div>
+        <div className="mt-auto pb-8 pt-96 w-full flex flex-col items-center gap-7">
+          <span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white/90 font-body">Partnering with Organizations Such As</span>
+          <div className="liquid-glass rounded-2xl px-8 py-5 flex items-center gap-5">
+            <img src="gfu-logo.png" alt="George Fox University" className="h-14 w-auto object-contain" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))" }} />
+            <div className="flex flex-col leading-tight">
+              <span className="font-heading italic text-3xl md:text-4xl text-white">George Fox</span>
+              <span className="font-body font-light text-sm md:text-base text-white/70 tracking-[0.18em] uppercase mt-0.5">University</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StartSection() {
+  const audiences = [
+    {
+      tag: "01",
+      title: "Mission-Based Organizations",
+      body: "Organizations with needs for innovative, efficient, and cost-effective solutions. Eleos is in its early startup phase and looking for places to serve.",
+    },
+    {
+      tag: "02",
+      title: "Christ-Centered Creators",
+      body: "Individuals with a heart for Christ and serving others, who enjoy ideating, mapping solutions, and bringing them to life — engineers, business minds, leaders, mentors, accountants, and artists.",
+    },
+    {
+      tag: "03",
+      title: "Prayer Partners",
+      body: "Those willing to commit to seeing where God would like to take this ministry, and to walk alongside in prayer.",
+    },
+  ];
+  return (
+    <section id="about" className="relative overflow-hidden">
+      <div id="learn-more" className="absolute -top-2" aria-hidden="true" />
+      <div className="relative z-10 px-6 lg:px-16 py-32 max-w-6xl mx-auto">
+        {/* Who is Len Klein */}
+        <div className="flex flex-col items-center text-center">
+          <Badge>About the Founder</Badge>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading italic text-white tracking-tight mt-5 max-w-3xl" style={{ lineHeight: 0.9 }}>
+            <BlurText text="Who is Len Klein?" />
+          </h2>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-white/80 font-body font-light text-sm md:text-base">
+            <span>Follower of Jesus Christ</span>
+            <span className="text-white/30">·</span>
+            <span>Husband</span>
+            <span className="text-white/30">·</span>
+            <span>Father</span>
+            <span className="text-white/30">·</span>
+            <span>Continuous Ideator</span>
+          </div>
+        </div>
+
+        {/* Bio — portrait + pull-quote + paragraph */}
+        <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
+            <div className="relative w-full max-w-[320px]">
+              <div className="absolute -inset-2 rounded-[28px] bg-gradient-to-br from-white/15 to-white/0 blur-xl" aria-hidden="true" />
+              <div className="liquid-glass rounded-3xl p-2 relative">
+                <img
+                  src="len.png"
+                  alt="Len Klein"
+                  className="w-full aspect-square object-cover rounded-[20px]"
+                  style={{ filter: "contrast(1.05)" }}
+                />
+              </div>
+              <div className="liquid-glass-strong rounded-full px-4 py-1.5 absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                <span className="font-body text-[11px] tracking-[0.2em] uppercase text-white/80">Len Klein · Founder</span>
+              </div>
+            </div>
+            <p className="font-heading italic text-2xl md:text-3xl text-white text-center lg:text-left mt-10" style={{ lineHeight: 1, letterSpacing: "-0.5px" }}>
+              "A continuous solutioner at heart."
+            </p>
+          </div>
+          <div className="lg:col-span-8 space-y-5 text-white/75 font-body font-light text-base leading-relaxed">
+            <p>
+              I love to identify and evaluate problems — brainstorming or ideating practical solutions, then working to bring them to light. For the last 35 years I've been working in the building design and construction industry, and over those decades I've come up with many ideas and business plans, but never had the time to bring them to reality.
+            </p>
+            <p>
+              Now I am officially "retired" — retired from a paycheck — and have moved into what I'm calling my <span className="font-heading italic text-white">Fall Season of Life</span>, where I can focus. The DNA of an engineer is continuous ideation and problem solving. The focus of my next few decades is to pursue some of those solutions, with a focus of serving others.
+            </p>
+          </div>
+        </div>
+
+        {/* Who Should Reach Out */}
+        <div className="mt-32">
+          <div className="flex flex-col items-center text-center">
+            <Badge>Who Should Reach Out</Badge>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white tracking-tight mt-5 max-w-2xl" style={{ lineHeight: 0.95 }}>
+              <BlurText text="If this is you, let's talk." />
+            </h3>
+            <p className="text-white/70 font-body font-light text-sm md:text-base max-w-2xl mt-6 leading-relaxed">
+              The hope is for ELEOS Solutions to become a hub where Christians can work together to serve mission-based organizations engaged with underserved communities — caring for their physical and spiritual well-being.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+            {audiences.map((a) => (
+              <div key={a.tag} className="liquid-glass rounded-2xl p-7 flex flex-col">
+                <span className="font-heading italic text-5xl text-white/40" style={{ lineHeight: 1 }}>{a.tag}</span>
+                <h4 className="font-heading italic text-2xl md:text-[1.75rem] text-white mt-5" style={{ lineHeight: 1 }}>{a.title}</h4>
+                <p className="text-white/65 font-body font-light text-sm mt-4 leading-relaxed">{a.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-12">
+            <a href="#contact" className="liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm font-medium text-white whitespace-nowrap">
+              Reach Out <ArrowUpRight size={16} stroke={2} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturesChess() {
+  const rows = [
+    { title: "Off-road mobility, built to be affordable.", body: "A recumbent e-assist handcycle engineered for rough terrain — gravel, hills, and uneven paths — at a fraction of the cost of commercial alternatives. Built from the ground up by a student team using standard bike parts and accessible fabrication.", cta: "See the Build", gif: "ELEOS Handcycle v.1", image: "handcycle.png", href: "build.html", reverse: false },
+    { title: "Terrain-ready. Built to be reproduced.", body: "A lever-driven off-road wheelchair engineered for rough terrain — hills, dirt, and gravel — using standard bike parts and simple fabrication. Tested against traditional wheelchairs, it cut traversal times nearly in half.", cta: "See the Build", gif: "ELEOS Adventure", image: "adventure.png", href: "adventure.html", reverse: true },
+  ];
+  return (
+    <section id="projects" className="relative px-6 lg:px-16 py-32 max-w-7xl mx-auto">
+      <div className="flex flex-col items-center text-center mb-20">
+        <Badge>Projects</Badge>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading italic text-white tracking-tight mt-5 max-w-3xl" style={{ lineHeight: 0.9 }}>
+          <BlurText text="Mobility Without Limits" />
+        </h2>
+      </div>
+      <div className="flex flex-col gap-20">
+        {rows.map((r, i) => (
+          <div key={i} className={`flex flex-col ${r.reverse ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-16`}>
+            <div className="flex-1 max-w-xl">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white tracking-tight" style={{ lineHeight: 0.95 }}>{r.title}</h3>
+              <p className="text-white/70 font-body font-light text-sm md:text-base mt-5 leading-relaxed">{r.body}</p>
+              <a href={r.href || "#"} className="liquid-glass-strong rounded-full px-5 py-2.5 inline-flex items-center gap-2 text-sm font-medium text-white mt-7 whitespace-nowrap">
+                {r.cta} <ArrowUpRight size={14} stroke={2} />
+              </a>
+            </div>
+            <div className="flex-1 w-full">
+              <div className="liquid-glass rounded-2xl overflow-hidden relative">
+                {r.image ? (
+                  <div className="relative aspect-[4/3] w-full">
+                    <img src={r.image} alt={r.gif} className="w-full h-full object-cover" />
+                    <span className="gif-placeholder-label">▶ {r.gif}</span>
+                  </div>
+                ) : (
+                  <div className="gif-placeholder">
+                    <span className="gif-placeholder-label">▶ {r.gif}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FeaturesGrid() {
+  const quotes = [
+    { text: "It is in serving others that we reflect the very nature of Christ.", who: "C.S. Lewis" },
+    { text: "God doesn't call us to just feel compassion but to act on it.", who: "Francis Chan" },
+    { text: "We are saved to serve, not to sit around and wait for heaven.", who: "A.W. Tozer" },
+  ];
+  const values = [
+    { letter: "E", word: "Elevating" },
+    { letter: "L", word: "Lives" },
+    { letter: "E", word: "through Empathy" },
+    { letter: "OS", word: "& Ongoing Support" },
+  ];
+  return (
+    <section className="relative">
+      <div className="relative z-10 px-6 lg:px-16 py-32 max-w-7xl mx-auto">
+        {/* Etymology */}
+        <div id="the-name" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5">
+            <Badge>The Name</Badge>
+            <div className="mt-7 flex items-baseline gap-4">
+              <span className="font-heading italic text-7xl md:text-8xl text-white" style={{ lineHeight: 0.9, letterSpacing: "-2px", textShadow: "0 2px 20px rgba(0,0,0,0.7)" }}>ἔλεος</span>
+              <span className="font-body text-xs tracking-[0.2em] uppercase text-white/60">éleos · Greek</span>
+            </div>
+            <p className="mt-6 font-heading italic text-3xl md:text-4xl text-white" style={{ lineHeight: 1, textShadow: "0 2px 16px rgba(0,0,0,0.6)" }}>
+              "mercy" · "compassion"
+            </p>
+          </div>
+          <div className="lg:col-span-7 space-y-5 text-white/85 font-body font-light text-base md:text-lg leading-relaxed" style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>
+            <p>
+              ELEOS is derived from the Greek word <span className="font-heading italic text-white">ἔλεος</span>, meaning <span className="font-heading italic text-white">mercy</span> or <span className="font-heading italic text-white">compassion</span>.
+            </p>
+            <p>
+              The name reflects our dedication to embodying Christian servant leadership and servant engineering — through the core values of <span className="text-white">Elevating Lives through Empathy and Ongoing Support</span>.
+            </p>
+          </div>
+        </div>
+
+        {/* Acronym strip */}
+        <div className="mt-20 liquid-glass rounded-3xl p-8 md:p-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {values.map((v, i) => (
+              <div key={i} className="flex flex-col items-start">
+                <span className="font-heading italic text-6xl md:text-7xl text-white" style={{ lineHeight: 0.9 }}>{v.letter}</span>
+                <span className="font-body font-light text-sm md:text-base text-white/75 mt-2">{v.word}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Company summary */}
+        <div className="mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div className="lg:col-span-4">
+            <Badge>What We Do</Badge>
+            <h3 className="mt-5 font-heading italic text-3xl md:text-4xl lg:text-5xl text-white" style={{ lineHeight: 0.95, letterSpacing: "-1px", textShadow: "0 2px 16px rgba(0,0,0,0.7)" }}>
+              Servant engineering for underserved communities.
+            </h3>
+            <div className="mt-6 inline-flex items-center gap-2 liquid-glass rounded-full px-3 py-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
+              <span className="font-body text-xs tracking-[0.15em] uppercase text-white/80">Non-profit · pursuing 501(c)(3)</span>
+            </div>
+          </div>
+          <div className="lg:col-span-8 space-y-5 text-white/85 font-body font-light text-base leading-relaxed" style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>
+            <p>
+              ELEOS Solutions focuses on serving others by identifying needs of individuals or underserved communities, then developing solutions that meet those needs. We team with existing mission-based organizations, addressing the tangible needs of the communities they serve as they care for both physical and spiritual well-being.
+            </p>
+            <p>
+              Our criteria for every solution: <span className="text-white">relevant, simple, cost-effective, maintainable</span>.
+            </p>
+            <div className="liquid-glass-strong rounded-2xl p-6 mt-2">
+              <span className="font-body text-xs tracking-[0.2em] uppercase text-white/60">Current focus · 2024 – 25</span>
+              <p className="mt-3 font-heading italic text-2xl md:text-3xl text-white" style={{ lineHeight: 1.05 }}>
+                Retrofit solutions for wheelchairs in Low- and Middle-Income Countries — where terrain outside of buildings is difficult to navigate.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Driven by */}
+        <div className="mt-24 flex flex-col items-center text-center">
+          <Badge>Why We Do It</Badge>
+          <h3 className="mt-5 font-heading italic text-3xl md:text-4xl lg:text-5xl text-white max-w-3xl" style={{ lineHeight: 0.95, textShadow: "0 2px 18px rgba(0,0,0,0.7)" }}>
+            At the heart of ELEOS is mercy — and the call to act on it.
+          </h3>
+          <p className="mt-6 text-white/85 font-body font-light text-base md:text-lg max-w-2xl leading-relaxed" style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>
+            Our work is driven by two things: <span className="font-heading italic text-white">The Great Commission</span> (Matt 28:18-20), and the commandment to <span className="font-heading italic text-white">Love your Neighbor</span> (Matt 22:37-40).
+          </p>
+        </div>
+
+        {/* Quotes */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {quotes.map((q, i) => (
+            <figure key={i} className="liquid-glass rounded-2xl p-7 flex flex-col">
+              <span className="font-heading italic text-5xl text-white/40" style={{ lineHeight: 0.7 }}>"</span>
+              <blockquote className="font-heading italic text-xl md:text-2xl text-white mt-2" style={{ lineHeight: 1.15 }}>
+                {q.text}
+              </blockquote>
+              <figcaption className="mt-6 flex items-center gap-3">
+                <span className="h-px w-8 bg-white/30" />
+                <span className="font-body text-xs tracking-[0.2em] uppercase text-white/80">{q.who}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Stats() {
+  const stats = [
+    { value: "83%", label: "Price reduction", project: "Handcycle", detail: "vs. commercial off-road options" },
+    { value: "53%", label: "Uphill climb improvement", project: "Adventure Wheelchair", detail: "vs. standard wheelchair" },
+  ];
+  return (
+    <section className="relative overflow-hidden">
+      <div className="relative z-10 px-6 lg:px-16 py-32 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center text-center mb-12">
+          <Badge>Measured Outcomes</Badge>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading italic text-white tracking-tight mt-5 max-w-3xl" style={{ lineHeight: 0.9 }}>
+            <BlurText text="Affordable. And better." />
+          </h2>
+        </div>
+        <div className="liquid-glass rounded-3xl p-12 md:p-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            {stats.map((s) => (
+              <div key={s.project} className="flex flex-col gap-3">
+                <span className="font-body text-xs tracking-[0.2em] uppercase text-white/55">{s.project}</span>
+                <div className="text-6xl md:text-7xl lg:text-8xl font-heading italic text-white" style={{ lineHeight: 0.95, letterSpacing: "-2px" }}>{s.value}</div>
+                <div className="font-heading italic text-2xl md:text-3xl text-white" style={{ lineHeight: 1.1 }}>{s.label}</div>
+                <div className="text-white/65 font-body font-light text-sm md:text-base mt-1">{s.detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const leadership = [
+    { title: "Empathy", body: "Understanding and sharing the feelings of others." },
+    { title: "Listening", body: "Actively hearing and valuing others' input." },
+    { title: "Awareness", body: "Recognizing the needs of the team and the broader environment." },
+    { title: "Stewardship", body: "Managing resources responsibly for the greater good." },
+    { title: "Commitment to Growth", body: "Prioritizing the development of team members." },
+    { title: "Building Community", body: "Fostering a sense of belonging and collaboration." },
+  ];
+  const engineering = [
+    { title: "Human-Centered Design", body: "Prioritizing the needs and experiences of users — especially underserved or marginalized communities." },
+    { title: "Ethical Responsibility", body: "Ensuring designs and processes align with moral principles and societal good." },
+    { title: "Sustainability", body: "Creating solutions that consider long-term environmental, economic, and social impacts." },
+    { title: "Collaboration", body: "Working inclusively with diverse stakeholders to co-create solutions." },
+    { title: "Stewardship of Technology", body: "Using engineering skills and resources responsibly to benefit society." },
+  ];
+  return (
+    <section id="servant-leadership" className="relative px-6 lg:px-16 py-32 max-w-7xl mx-auto">
+      <div className="flex flex-col items-center text-center mb-16">
+        <Badge>Our Philosophy</Badge>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading italic text-white tracking-tight mt-5 max-w-3xl" style={{ lineHeight: 0.9 }}>
+          <BlurText text="Servant Leadership. Servant Engineering." />
+        </h2>
+        <p className="text-white/70 font-body font-light text-base md:text-lg max-w-3xl mt-7 leading-relaxed">
+          Two practices, one posture: putting the well-being and growth of others before our own. It's the philosophy that shapes how we lead — and how we engineer.
+        </p>
+      </div>
+
+      {/* Two definitions side-by-side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Servant Leadership */}
+        <div className="liquid-glass rounded-3xl p-8 md:p-10 flex flex-col">
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className="font-heading italic text-5xl md:text-6xl text-white" style={{ lineHeight: 0.9, letterSpacing: "-1px" }}>Servant</span>
+            <span className="font-heading italic text-5xl md:text-6xl text-white/70" style={{ lineHeight: 0.9, letterSpacing: "-1px" }}>Leadership.</span>
+          </div>
+          <p className="text-white/75 font-body font-light text-sm md:text-base mt-6 leading-relaxed">
+            A leadership philosophy where the primary goal of the leader is to serve others — focusing on the growth, development, and well-being of individuals and teams to achieve collective goals. It contrasts with traditional leadership, which prioritizes the leader's power and control.
+          </p>
+          <div className="mt-8 pt-7 border-t border-white/10">
+            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-white/55">Key Characteristics</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5 mt-5">
+              {leadership.map((c, i) => (
+                <div key={c.title} className="flex gap-3">
+                  <span className="font-heading italic text-white/40 text-lg mt-0.5" style={{ lineHeight: 1, minWidth: "1.5rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <div className="font-heading italic text-xl text-white" style={{ lineHeight: 1 }}>{c.title}</div>
+                    <p className="text-white/65 font-body font-light text-xs mt-1.5 leading-relaxed">{c.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Servant Engineering */}
+        <div className="liquid-glass rounded-3xl p-8 md:p-10 flex flex-col">
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className="font-heading italic text-5xl md:text-6xl text-white" style={{ lineHeight: 0.9, letterSpacing: "-1px" }}>Servant</span>
+            <span className="font-heading italic text-5xl md:text-6xl text-white/70" style={{ lineHeight: 0.9, letterSpacing: "-1px" }}>Engineering.</span>
+          </div>
+          <p className="text-white/75 font-body font-light text-sm md:text-base mt-6 leading-relaxed">
+            An approach to engineering and design that prioritizes serving the needs of others — focusing on ethical, sustainable, and human-centered solutions. It applies the principles of servant leadership to technical and problem-solving domains.
+          </p>
+          <div className="mt-8 pt-7 border-t border-white/10">
+            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-white/55">Core Principles</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5 mt-5">
+              {engineering.map((c, i) => (
+                <div key={c.title} className="flex gap-3">
+                  <span className="font-heading italic text-white/40 text-lg mt-0.5" style={{ lineHeight: 1, minWidth: "1.5rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <div className="font-heading italic text-xl text-white" style={{ lineHeight: 1 }}>{c.title}</div>
+                    <p className="text-white/65 font-body font-light text-xs mt-1.5 leading-relaxed">{c.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Closing line */}
+      <div className="mt-14 flex flex-col items-center text-center">
+        <div className="liquid-glass-strong rounded-3xl px-8 md:px-12 py-10 max-w-3xl">
+          <p className="font-heading italic text-2xl md:text-3xl lg:text-4xl text-white" style={{ lineHeight: 1.1 }}>
+            Both philosophies overlap with Christ-focused, mission-driven work — serving others through technical expertise, in alignment with the Great Commission.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CtaFooter() {
+  return (
+    <section id="contact" className="relative overflow-hidden">
+      <div className="absolute inset-0" style={{
+        background: "radial-gradient(ellipse at 30% 35%, #5a8a5e 0%, #2f5a3a 35%, #143821 70%, #000 100%)"
+      }} />
+      <div className="absolute inset-0 opacity-30" style={{
+        backgroundImage: "repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 14px)",
+        mixBlendMode: "overlay"
+      }} />
+      <div className="absolute top-0 left-0 right-0 z-[1] pointer-events-none" style={{ height: 200, background: "linear-gradient(to bottom, #000, transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 z-[1] pointer-events-none" style={{ height: 200, background: "linear-gradient(to top, #000, transparent)" }} />
+      <div className="relative z-10 px-6 lg:px-16 pt-40 pb-10 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center text-center">
+          <Badge>Get Involved</Badge>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading italic text-white max-w-3xl mt-5" style={{ lineHeight: 0.9, letterSpacing: "-2px" }}>
+            <BlurText text="Let's serve, together." />
+          </h2>
+          <p className="text-white/75 font-body font-light text-base md:text-lg max-w-xl mt-7 leading-relaxed">
+            Whether you're a mission-based organization, a Christ-centered creator, or a prayer partner — we'd love to hear from you. Reach out and let's find a way to work together.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-9">
+            <a href="mailto:hello@eleos-solutions.org" className="bg-white text-black rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm font-medium whitespace-nowrap">
+              Reach Out <ArrowUpRight size={16} stroke={2} />
+            </a>
+            <a href="#learn-more" className="liquid-glass-strong rounded-full px-6 py-3 inline-flex items-center gap-2 text-sm font-medium text-white whitespace-nowrap">
+              Learn More
+            </a>
+          </div>
+        </div>
+        <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-white/40 text-xs font-body">© 2026 ELEOS Solutions. All rights reserved.</div>
+          <div className="flex items-center gap-6">
+            {["Privacy", "Terms", "Contact"].map((l) => (
+              <a key={l} href="#" className="text-white/40 hover:text-white/80 transition text-xs font-body">{l}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function App() {
+  return (
+    <div className="bg-black">
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <div className="bg-black">
+          <div className="relative">
+            {/* Stationary background video — sticky pattern: video sticks while content scrolls over */}
+            <div className="sticky top-0 w-full h-screen overflow-hidden z-0" aria-hidden="true" style={{
+              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, #000 18%, #000 100%)",
+              maskImage: "linear-gradient(180deg, transparent 0%, #000 18%, #000 100%)"
+            }}>
+              <iframe
+                src="https://player.mux.com/MhwIrqVmaCOt4xPM00N2oNOzP4RyjSrCMebYP2Z3RGRQ?autoplay=true&muted=true&loop=true&controls=false&nohotkeys=true&thumbnailTime=0&playback-rate=0.5&default-playback-rate=0.5"
+                allow="autoplay; fullscreen"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0, pointerEvents: "none", filter: "brightness(0.7) hue-rotate(75deg) saturate(0.85)" }}
+                title="Background"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.4))" }} />
+            </div>
+            <div className="relative z-10" style={{ marginTop: "-100vh" }}>
+              <FeaturesGrid />
+              <StartSection />
+              <FeaturesChess />
+              <Stats />
+              <Testimonials />
+            </div>
+          </div>
+          <CtaFooter />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+// Auto-print after fonts + React mount settle
+(function () {
+  function triggerPrint() {
+    // Force any in-view-gated BlurText spans to show, in case IntersectionObserver hasn't fired
+    document.querySelectorAll('span').forEach((s) => {
+      if (s.style && s.style.filter && s.style.filter.indexOf('blur') !== -1) {
+        s.style.filter = 'none';
+        s.style.opacity = '1';
+        s.style.transform = 'none';
+      }
+    });
+    window.print();
+  }
+  Promise.all([
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+    new Promise((r) => window.addEventListener('load', r, { once: true })),
+  ]).then(() => setTimeout(triggerPrint, 1200));
+})();
+    </script>
+  </body>
+</html>
